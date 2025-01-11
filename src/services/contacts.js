@@ -19,6 +19,28 @@ export const createContact = async (payload) => {
   //     "isFavourite": false,
   //     "contactType": "personal"
   //  }
-  const student = await ContactsCollection.create(payload);
-  return student;
+  const contact = await ContactsCollection.create(payload);
+  return contact;
+};
+
+export const updateContact = async (contactId, payload, options = {}) => {
+  console.log('contactId', contactId);
+  console.log('payload', payload);
+
+  const rawResult = await ContactsCollection.findOneAndUpdate(
+    { _id: contactId },
+    payload,
+    {
+      new: true,
+      includeResultMetadata: true,
+      ...options,
+    },
+  );
+
+  if (!rawResult || !rawResult.value) return null;
+
+  return {
+    contact: rawResult.value,
+    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
+  };
 };
