@@ -9,8 +9,6 @@ export const getAllContacts = async ({
   sortBy = '_id',
   filter = {},
 }) => {
-  console.log('filter:', filter);
-
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
@@ -18,7 +16,6 @@ export const getAllContacts = async ({
   if (filter.type) {
     contactsQuery.where('contactType').equals(filter.type);
   }
-  console.log('filter.isFavourite', filter.isFavourite);
 
   if (filter.isFavourite !== undefined) {
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
