@@ -1,4 +1,8 @@
 import Joi from 'joi';
+import JoiObjectId from 'joi-objectid';
+
+// Додаємо метод objectId до Joi
+Joi.objectId = JoiObjectId(Joi);
 
 export const createContactsSchema = Joi.object({
   name: Joi.string().min(3).max(20).required().messages({
@@ -27,6 +31,9 @@ export const createContactsSchema = Joi.object({
       'any.required': 'Contact type is required',
       'any.only': 'Contact type must be one of [work, home, personal]',
     }),
+  userId: Joi.objectId().optional().messages({
+    'string.pattern.base': 'Parent ID must be a valid ObjectId',
+  }),
 });
 
 export const updateContactsSchema = Joi.object({
@@ -40,5 +47,8 @@ export const updateContactsSchema = Joi.object({
   isFavourite: Joi.boolean(),
   contactType: Joi.string().valid('work', 'home', 'personal').messages({
     'any.only': 'Contact type must be one of [work, home, personal]',
+  }),
+  userId: Joi.objectId().optional().messages({
+    'string.pattern.base': 'Parent ID must be a valid ObjectId',
   }),
 });
