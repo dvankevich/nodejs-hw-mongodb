@@ -48,21 +48,18 @@ export const getContactById = async (contactId, userId) => {
 };
 
 export const createContact = async (payload) => {
-  // payload example
-  // {
-  //     "name": "DATA the Android",
-  //     "phoneNumber": "+380000000221",
-  //     "email": "data@starfleet.mil",
-  //     "isFavourite": false,
-  //     "contactType": "personal"
-  //  }
   const contact = await ContactsCollection.create(payload);
   return contact;
 };
 
-export const updateContact = async (contactId, payload, options = {}) => {
+export const updateContact = async (
+  userId,
+  contactId,
+  payload,
+  options = {},
+) => {
   const rawResult = await ContactsCollection.findOneAndUpdate(
-    { _id: contactId },
+    { _id: contactId, userId },
     payload,
     {
       new: true,
