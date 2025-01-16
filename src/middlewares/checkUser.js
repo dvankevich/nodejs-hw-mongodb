@@ -2,7 +2,6 @@ import createHttpError from 'http-errors';
 
 export const checkUser = async (req, res, next) => {
   const { user } = req;
-  console.log('user', user);
 
   if (!user) {
     next(createHttpError(401));

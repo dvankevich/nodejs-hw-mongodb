@@ -10,8 +10,6 @@ export const getAllContacts = async ({
   sortBy = '_id',
   filter = {},
 }) => {
-  console.log('userId', userId);
-
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
@@ -42,8 +40,6 @@ export const getAllContacts = async ({
 
 export const getContactById = async (contactId, userId) => {
   const contact = await ContactsCollection.findOne({ _id: contactId, userId });
-  console.log('getContactById', contact);
-
   return contact;
 };
 
