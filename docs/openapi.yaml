@@ -7,14 +7,16 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: Very simple minimalistic contacts app.
 tags:
+  - name: Contacts
+    description: Operation with contacts.
   # теги, що ви будете використовувати
 servers:
   - url: http://localhost:3000
   - url: https://hw2-mongodb-41jp.onrender.com
 paths:
   /contacts/{id}:
-  get:
-    $ref: ../swagger/paths/contacts/{id}/get.yaml
+    get:
+      $ref: ../swagger/paths/contacts/{id}/get.yaml
   # тут будуть посилання на ендпоінти
 components:
   securitySchemes:
