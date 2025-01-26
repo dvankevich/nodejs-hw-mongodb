@@ -25,112 +25,6 @@
   ],
   "paths": {
     "/contacts": {
-      "post": {
-        "tags": [
-          "Contacts"
-        ],
-        "summary": "Create contact",
-        "operationId": "createContact",
-        "description": "Create a contact with payload",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "name",
-                  "phoneNumber",
-                  "contactType",
-                  "userId",
-                  "createdAt",
-                  "updatedAt"
-                ],
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "Contact name.",
-                    "example": "John Doe"
-                  },
-                  "phoneNumber": {
-                    "type": "string",
-                    "description": "Phone number.",
-                    "example": "+380000000221"
-                  },
-                  "email": {
-                    "type": "string",
-                    "description": "Email address.",
-                    "example": "johndoe@example.com"
-                  },
-                  "isFavorite": {
-                    "type": "boolean",
-                    "description": "is favorite flag.",
-                    "example": true
-                  },
-                  "contactType": {
-                    "type": "string",
-                    "description": "contact type.",
-                    "enum": [
-                      "work",
-                      "home",
-                      "personal"
-                    ],
-                    "example": "personal"
-                  },
-                  "userId": {
-                    "type": "string",
-                    "description": "ID of the contact's user.",
-                    "example": "674dc213e880c5a6c4e30b19"
-                  },
-                  "photo": {
-                    "type": "string",
-                    "description": "Link to contact's photo",
-                    "example": "https://res.cloudinary.com/uqwgdu/image/upload/default.png"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Creates a contact",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 201
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully created a contact!"
-                    },
-                    "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/contact"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
-          }
-        }
-      },
       "get": {
         "tags": [
           "Contacts"
@@ -316,6 +210,112 @@
             "$ref": "#/components/responses/500"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Create contact",
+        "operationId": "createContact",
+        "description": "Create a contact with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "phoneNumber",
+                  "contactType",
+                  "userId",
+                  "createdAt",
+                  "updatedAt"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Contact name.",
+                    "example": "John Doe"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Phone number.",
+                    "example": "+380000000221"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Email address.",
+                    "example": "johndoe@example.com"
+                  },
+                  "isFavorite": {
+                    "type": "boolean",
+                    "description": "is favorite flag.",
+                    "example": true
+                  },
+                  "contactType": {
+                    "type": "string",
+                    "description": "contact type.",
+                    "enum": [
+                      "work",
+                      "home",
+                      "personal"
+                    ],
+                    "example": "personal"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "ID of the contact's user.",
+                    "example": "674dc213e880c5a6c4e30b19"
+                  },
+                  "photo": {
+                    "type": "string",
+                    "description": "Link to contact's photo",
+                    "example": "https://res.cloudinary.com/uqwgdu/image/upload/default.png"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Creates a contact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully created a contact!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/contact"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
       }
     },
     "/contacts/{id}": {
@@ -383,6 +383,47 @@
             "description": "Contact not found."
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Delete a contact by ID",
+        "operationId": "deleteContact",
+        "description": "Delete a contact by ID",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "678bf8af14d55985f0900f6e"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete contact by id"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
       }
     }
   },
@@ -394,6 +435,43 @@
       }
     },
     "responses": {
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "BadRequestError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Bad Request. Invalid parameter."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "401": {
         "description": "Unauthorized error",
         "content": {
@@ -423,6 +501,43 @@
                     "message": {
                       "type": "string",
                       "example": "Access token expired or Session not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Fount Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "NotFoundError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Contact not found"
                     }
                   }
                 }
