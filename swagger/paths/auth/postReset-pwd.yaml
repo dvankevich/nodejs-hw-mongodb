@@ -1,34 +1,39 @@
 tags:
   - Auth
-summary: Send reset password email
-operationId: sendResetEmail
-description: Send email with a password reset link.
+summary: Reset password
+operationId: resetPassword
+description: Reset password with reset token and new password.
 security: []
 requestBody:
-  description: User email.
+  description: Reset token from email and new password.
   required: true
   content:
     application/json:
       schema:
         type: object
         required:
-          - email
+          - token
+          - password
         properties:
-          email:
+          token:
             type: string
-            format: email
-            description: User email address.
-            example: 'jconnor@skynet.mil'
+            description: Reset token.
+            example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzhiZjgzZTE0ZDU1OTg1ZjA5MDBmNjAiLCJlbWFpbCI6ImR2YW5rZXZpY2hANXByby1zb2Z0d2FyZS5uZXQiLCJpYXQiOjE3MzcyMjkwOTMsImV4cCI6MTczNzIyOTk5M30.Eloifgrr6wRLAxLXaMunnbjlaR7QPrU89JVcp2i0'
+          password:
+            type: string
+            format: password
+            description: New user password.
+            example: 'NewPa$$word'
 responses:
   '200':
-    description: Successfully sent password reset email.
+    description: Successfully updated password.
     content:
       application/json:
         schema:
           type: object
           required:
-            - message
             - status
+            - message
             - data
           properties:
             status:
@@ -36,12 +41,14 @@ responses:
               example: 200
             message:
               type: string
-              example: 'Reset password email was successfully sent!'
+              example: 'Password was successfully reset!'
             data:
               type: object
               example: {}
   '400':
     $ref: ../../components/responses/400.yaml
+  '401':
+    $ref: ../../components/responses/401.yaml
   '404':
     $ref: ../../components/responses/404.yaml
   '500':
