@@ -1,7 +1,7 @@
 tags:
   - Auth
-summary: /auth/register
-description: /auth/register
+summary: Register new user
+description: New user registration
 operationId: authRegister
 security: []
 requestBody:

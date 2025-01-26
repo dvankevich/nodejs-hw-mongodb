@@ -42,7 +42,7 @@ paths:
       $ref: ../swagger/paths/auth/postRefresh.yaml
   /auth/send-reset-email:
     post:
-      $ref: ../swagger/paths/auth/postReset-pwd.yaml
+      $ref: ../swagger/paths/auth/postSend-reset-email.yaml
 components:
   securitySchemes:
     bearerAuth:
