@@ -40,6 +40,9 @@ paths:
   /auth/refresh:
     post:
       $ref: ../swagger/paths/auth/postRefresh.yaml
+  /auth/send-reset-email:
+    post:
+      $ref: ../swagger/paths/auth/postReset-pwd.yaml
 components:
   securitySchemes:
     bearerAuth:
