@@ -21,6 +21,10 @@
     {
       "name": "Contacts",
       "description": "Operation with contacts."
+    },
+    {
+      "name": "Auth",
+      "description": "Auth operations."
     }
   ],
   "paths": {
@@ -555,6 +559,86 @@
           }
         }
       }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "/auth/register",
+        "description": "/auth/register",
+        "operationId": "authRegister",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "teacher01@mail.com"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Teacher01"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "Pa$$w0rd"
+                  }
+                }
+              },
+              "examples": {
+                "/auth/register": {
+                  "value": {
+                    "email": "teacher01@mail.com",
+                    "name": "Teacher01",
+                    "password": "Pa$$w0rd"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created a user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully registered a user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/userRegister"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -676,6 +760,47 @@
           }
         }
       },
+      "409": {
+        "description": "The HTTP 409 Conflict client error response status code indicates a request conflict with the current state of the target resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "description": "HTTP error status.",
+                  "example": 409
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Error name.",
+                  "example": "ConflictError"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "Details about the error.",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error explanation.",
+                      "example": "Email in use"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "500": {
         "description": "Internal Server Error",
         "content": {
@@ -771,6 +896,31 @@
             "type": "string",
             "description": "Link to contact's photo",
             "example": "https://res.cloudinary.com/uqwgdu/image/upload/default.png"
+          }
+        }
+      },
+      "userRegister": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "properties": {
+          "name": {
+            "description": "User name",
+            "type": "string",
+            "example": "My Name"
+          },
+          "email": {
+            "description": "User email",
+            "type": "string",
+            "example": "myname@mail.com"
+          },
+          "password": {
+            "description": "User password",
+            "type": "string",
+            "example": "SuperPassword"
           }
         }
       }
