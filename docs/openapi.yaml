@@ -31,6 +31,9 @@ paths:
   /auth/register:
     post:
       $ref: ../swagger/paths/auth/postRegister.yaml
+  /auth/login:
+    post:
+      $ref: ../swagger/paths/auth/postLogin.yaml
 components:
   securitySchemes:
     bearerAuth:
