@@ -20,8 +20,17 @@ parameters:
     name: sortBy
     schema:
       type: string
+      enum:
+        [
+          'name',
+          'contactType',
+          'isFavourite',
+          'email',
+          'createdAt',
+          'updatedAt',
+        ]
       example: 'name'
-    description: 'All fields can be specified. Example - name, contactType ...'
+    description: 'field to sort by'
   - in: query
     name: sortOrder
     schema:
@@ -35,7 +44,7 @@ parameters:
       type: boolean
       example: false
   - in: query
-    name: contactType
+    name: type
     schema:
       type: string
       enum: ['work', 'home', 'personal']
@@ -112,3 +121,5 @@ responses:
                   example: false
   '401':
     $ref: ../../components/responses/401.yaml
+  '500':
+    $ref: ../../components/responses/500.yaml
