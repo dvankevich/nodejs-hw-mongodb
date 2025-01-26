@@ -46,16 +46,18 @@
             "in": "query",
             "name": "page",
             "schema": {
-              "type": "integer"
-            },
-            "example": 1
+              "type": "integer",
+              "example": 1,
+              "default": 1
+            }
           },
           {
             "in": "query",
             "name": "perPage",
             "schema": {
               "type": "integer",
-              "example": 5
+              "example": 5,
+              "default": 10
             }
           },
           {
@@ -64,14 +66,17 @@
             "schema": {
               "type": "string",
               "enum": [
+                "_id",
                 "name",
+                "phoneNumber",
                 "contactType",
                 "isFavourite",
                 "email",
                 "createdAt",
                 "updatedAt"
               ],
-              "example": "name"
+              "example": "name",
+              "default": "_id"
             },
             "description": "field to sort by"
           },
@@ -242,15 +247,13 @@
                   "name",
                   "phoneNumber",
                   "contactType",
-                  "userId",
-                  "createdAt",
-                  "updatedAt"
+                  "isFavourite"
                 ],
                 "properties": {
                   "name": {
                     "type": "string",
                     "description": "Contact name.",
-                    "example": "John Doe"
+                    "example": "John Connor"
                   },
                   "phoneNumber": {
                     "type": "string",
@@ -260,9 +263,9 @@
                   "email": {
                     "type": "string",
                     "description": "Email address.",
-                    "example": "johndoe@example.com"
+                    "example": "jconnor@skynet.mil"
                   },
-                  "isFavorite": {
+                  "isFavourite": {
                     "type": "boolean",
                     "description": "is favorite flag.",
                     "example": true
@@ -277,15 +280,10 @@
                     ],
                     "example": "personal"
                   },
-                  "userId": {
-                    "type": "string",
-                    "description": "ID of the contact's user.",
-                    "example": "674dc213e880c5a6c4e30b19"
-                  },
                   "photo": {
                     "type": "string",
-                    "description": "Link to contact's photo",
-                    "example": "https://res.cloudinary.com/uqwgdu/image/upload/default.png"
+                    "description": "Contact's photo",
+                    "format": "binary"
                   }
                 }
               }
@@ -321,6 +319,9 @@
                 }
               }
             }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -444,7 +445,7 @@
                     "description": "Email address.",
                     "example": "johndoe@example.com"
                   },
-                  "isFavorite": {
+                  "isFavourite": {
                     "type": "boolean",
                     "description": "is favorite flag.",
                     "example": true
@@ -1239,7 +1240,7 @@
             "description": "Email address.",
             "example": "johndoe@example.com"
           },
-          "isFavorite": {
+          "isFavourite": {
             "type": "boolean",
             "description": "is favorite flag.",
             "example": true

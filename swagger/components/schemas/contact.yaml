@@ -24,7 +24,7 @@ properties:
     type: string
     description: Email address.
     example: 'johndoe@example.com'
-  isFavorite:
+  isFavourite:
     type: boolean
     description: is favorite flag.
     example: true

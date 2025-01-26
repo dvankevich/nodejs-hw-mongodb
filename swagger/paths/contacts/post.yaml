@@ -14,14 +14,12 @@ requestBody:
           - name
           - phoneNumber
           - contactType
-          - userId
-          - createdAt
-          - updatedAt
+          - isFavourite
         properties:
           name:
             type: string
             description: Contact name.
-            example: 'John Doe'
+            example: 'John Connor'
           phoneNumber:
             type: string
             description: Phone number.
@@ -29,8 +27,8 @@ requestBody:
           email:
             type: string
             description: Email address.
-            example: 'johndoe@example.com'
-          isFavorite:
+            example: 'jconnor@skynet.mil'
+          isFavourite:
             type: boolean
             description: is favorite flag.
             example: true
@@ -39,14 +37,10 @@ requestBody:
             description: contact type.
             enum: [work, home, personal]
             example: 'personal'
-          userId:
-            type: string
-            description: ID of the contact's user.
-            example: '674dc213e880c5a6c4e30b19'
           photo:
             type: string
-            description: Link to contact's photo
-            example: 'https://res.cloudinary.com/uqwgdu/image/upload/default.png'
+            description: Contact's photo
+            format: binary
 responses:
   '201':
     description: Creates a contact
@@ -68,6 +62,8 @@ responses:
             data:
               type: object
               $ref: '../../components/schemas/contact.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
   '401':
     $ref: '../../components/responses/401.yaml'
   '500':
