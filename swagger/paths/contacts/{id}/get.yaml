@@ -35,8 +35,10 @@ responses:
               type: object
               $ref: ../../../components/schemas/contact.yaml
   '400':
-    description: Bad Request. Invalid contactId
+    $ref: '../../../components/responses/400.yaml'
   '401':
-    $ref: ../../../components/responses/401.yaml
+    $ref: '../../../components/responses/401.yaml'
   '404':
-    description: Contact not found.
+    $ref: '../../../components/responses/404.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'
