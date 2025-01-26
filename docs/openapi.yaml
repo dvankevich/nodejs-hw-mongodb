@@ -9,6 +9,8 @@ info:
 tags:
   - name: Contacts
     description: Operation with contacts.
+  - name: Auth
+    description: Auth operations.
   # теги, що ви будете використовувати
 servers:
   - url: http://localhost:3000
@@ -26,6 +28,9 @@ paths:
       $ref: ../swagger/paths/contacts/{id}/patch.yaml
     delete:
       $ref: ../swagger/paths/contacts/{id}/delete.yaml
+  /auth/register:
+    post:
+      $ref: ../swagger/paths/auth/postRegister.yaml
 components:
   securitySchemes:
     bearerAuth:

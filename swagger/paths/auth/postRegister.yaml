@@ -1,0 +1,34 @@
+tags:
+  - Auth
+summary: /auth/register
+description: /auth/register
+operationId: authRegister
+security: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          email:
+            type: string
+            example: teacher01@mail.com
+          name:
+            type: string
+            example: Teacher01
+          password:
+            type: string
+            example: Pa$$w0rd
+      examples:
+        /auth/register:
+          value:
+            email: teacher01@mail.com
+            name: Teacher01
+            password: Pa$$w0rd
+responses:
+  '200':
+    description: ''
+  '409':
+    $ref: ../../components/responses/409.yaml
+  '500':
+    $ref: ../../components/responses/500.yaml
