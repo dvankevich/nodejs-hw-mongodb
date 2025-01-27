@@ -430,7 +430,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "required": false,
                   "name": {
                     "type": "string",
                     "description": "Contact name.",
