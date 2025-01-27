@@ -430,6 +430,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "required": false,
                   "name": {
                     "type": "string",
                     "description": "Contact name.",
@@ -460,15 +461,10 @@
                     ],
                     "example": "personal"
                   },
-                  "userId": {
-                    "type": "string",
-                    "description": "ID of the contact's user.",
-                    "example": "674dc213e880c5a6c4e30b19"
-                  },
                   "photo": {
                     "type": "string",
-                    "description": "Link to contact's photo",
-                    "example": "https://res.cloudinary.com/uqwgdu/image/upload/default.png"
+                    "description": "Contact photo",
+                    "format": "binary"
                   }
                 }
               }

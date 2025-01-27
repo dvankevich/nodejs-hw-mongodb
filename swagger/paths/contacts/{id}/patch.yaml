@@ -39,14 +39,10 @@ requestBody:
             description: contact type.
             enum: [work, home, personal]
             example: 'personal'
-          userId:
-            type: string
-            description: ID of the contact's user.
-            example: '674dc213e880c5a6c4e30b19'
           photo:
             type: string
-            description: Link to contact's photo
-            example: 'https://res.cloudinary.com/uqwgdu/image/upload/default.png'
+            description: Contact photo
+            format: binary
 responses:
   '200':
     description: Patch a contact
